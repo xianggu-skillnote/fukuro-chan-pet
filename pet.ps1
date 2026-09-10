@@ -186,7 +186,13 @@ function Import-PngImage {
     param([string]$Path)
     $bytes = [System.IO.File]::ReadAllBytes($Path)
     $stream = New-Object System.IO.MemoryStream(,$bytes)
-    return New-Object System.Drawing.Bitmap($stream)
+    $loaded = New-Object System.Drawing.Bitmap($stream)
+    # Bitmap(Stream) keeps the stream alive for the image's lifetime; clone into an
+    # independent bitmap so $stream can be garbage-collected safely.
+    $copy = New-Object System.Drawing.Bitmap($loaded)
+    $loaded.Dispose()
+    $stream.Dispose()
+    return $copy
 }
 
 $images = @{

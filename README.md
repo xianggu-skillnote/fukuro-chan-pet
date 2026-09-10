@@ -13,25 +13,19 @@ Windows専用です（PowerShell + WinForms）。
 ## 必要なもの
 
 - Windows + Claude Code CLI（フックに対応したバージョン）
+- `bash`（Git for Windows などに含まれるもの）がPATHに通っていること。フックの実行に使います
 
 表情画像（`idle.png` / `running.png` / `waiting.png`、背景透過PNG）はこのリポジトリに同梱のふくろう画像がデフォルトで使われます。好きなキャラクターに差し替えたい場合は `%USERPROFILE%\fukuro-chan\` に自分のPNGを先に置いてから `install.ps1` を実行してください（既にある画像は上書きされません）。
 
 ## セットアップ
 
 1. このリポジトリをクローンする
-2. リポジトリのフォルダで `install.ps1` を実行する（画像を自作したい場合は、先に `%USERPROFILE%\fukuro-chan\` に `idle.png` / `running.png` / `waiting.png` を置いてから実行）
+2. リポジトリのフォルダで `install.ps1` を実行する
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File install.ps1
    ```
-
-   これで以下が行われます:
-   - `~/.claude/hooks/fukuro-chan/` にスクリプトを配置
-   - 画像からアイコン (`pet.ico`) を生成
-   - デスクトップにショートカット (`fukuro-chan.lnk`) を作成
-   - `~/.claude/settings.json` にフックを追記（既存の設定は壊しません。再実行しても重複登録されません）
-
-4. デスクトップの `fukuro-chan` ショートカットをダブルクリックして起動
+3. デスクトップの `fukuro-chan` ショートカットをダブルクリックして起動
 
 ログイン時に自動起動したい場合は、このショートカットを `shell:startup` フォルダにコピーしてください。
 
