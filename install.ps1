@@ -16,15 +16,24 @@ $imagePaths = @{
 Write-Host "fukuro-chan installer"
 Write-Host "------------------------"
 
+New-Item -ItemType Directory -Force -Path $imageDir | Out-Null
+
 $missing = $imagePaths.GetEnumerator() | Where-Object { -not (Test-Path $_.Value) }
-if ($missing) {
+foreach ($m in $missing) {
+    $bundled = Join-Path $repoDir "$($m.Key).png"
+    if (Test-Path $bundled) {
+        Copy-Item -Path $bundled -Destination $m.Value
+        Write-Host "同梱のデフォルト画像を使用します: $($m.Value)"
+    }
+}
+
+$stillMissing = $imagePaths.GetEnumerator() | Where-Object { -not (Test-Path $_.Value) }
+if ($stillMissing) {
     Write-Host ""
-    Write-Host "画像がまだ用意されていません。次のパスに、背景透過PNGを置いてから、もう一度このスクリプトを実行してください:" -ForegroundColor Yellow
-    foreach ($m in $missing) {
+    Write-Host "画像が用意できませんでした。次のパスに、背景透過PNGを置いてから、もう一度このスクリプトを実行してください:" -ForegroundColor Yellow
+    foreach ($m in $stillMissing) {
         Write-Host "  $($m.Value)"
     }
-    Write-Host ""
-    Write-Host "($imageDir フォルダ自体が無い場合は作成してください)"
     exit 1
 }
 

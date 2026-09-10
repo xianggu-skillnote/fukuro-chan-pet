@@ -13,14 +13,13 @@ Windows専用です（PowerShell + WinForms）。
 ## 必要なもの
 
 - Windows + Claude Code CLI（フックに対応したバージョン）
-- 自分で用意した表情画像3枚（背景透過PNG）: `idle.png` / `running.png` / `waiting.png`
-  - このリポジトリには画像は含まれていません。好きなキャラクターの画像を用意してください
+
+表情画像（`idle.png` / `running.png` / `waiting.png`、背景透過PNG）はこのリポジトリに同梱のふくろう画像がデフォルトで使われます。好きなキャラクターに差し替えたい場合は `%USERPROFILE%\fukuro-chan\` に自分のPNGを先に置いてから `install.ps1` を実行してください（既にある画像は上書きされません）。
 
 ## セットアップ
 
 1. このリポジトリをクローンする
-2. `%USERPROFILE%\fukuro-chan\` フォルダを作り、そこに `idle.png` / `running.png` / `waiting.png` を置く
-3. リポジトリのフォルダで `install.ps1` を実行する
+2. リポジトリのフォルダで `install.ps1` を実行する（画像を自作したい場合は、先に `%USERPROFILE%\fukuro-chan\` に `idle.png` / `running.png` / `waiting.png` を置いてから実行）
 
    ```powershell
    powershell -ExecutionPolicy Bypass -File install.ps1
